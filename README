@@ -1,0 +1,21 @@
+
+The ``gentabs`` module extends the Nimrod standard ``strtabs`` module but extends
+it to allow other than strings to be stored in the table.  The keys are required
+to be strings, but the values may be any Nimrod or user defined type.  This module
+supports matching of keys in case-sensitive, case-insensitive and style-insensitive
+modes.
+
+Note: This module (or the compiler) is broken!!!  The test cases in the ``gentabs``
+module file run correctly for basic Nimrod data types as well as user-defined types
+(for the most part).  It fails, however, on tables-of-tables.  That is, you cannot
+embed a gentab table in a gentab table.  Caveat:  Actually you can but accessing
+the stored table within a loop using ``pairs`` seems to fail.  That is, 
+
+for k,v in pairs(z):
+  for k2,v2 in pairs(v):
+    echo( "$#: $# <-> $#" % [k, k2,$v2] )
+
+does not compile ("Error: execution of an external program failed").
+
+If you stay away from tables-of-tables it seems OK though.
+
